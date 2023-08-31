@@ -1,7 +1,7 @@
-const { containerPlugin } = require('@vuepress/plugin-container')
-const { defaultTheme } = require('@vuepress/theme-default')
-const { registerComponentsPlugin } = require('@vuepress/plugin-register-components')
-const { path } = require('@vuepress/utils')
+import { containerPlugin } from '@vuepress/plugin-container'
+import { defaultTheme } from '@vuepress/theme-default'
+import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
+import { path } from '@vuepress/utils'
 
 module.exports = {
   lang: 'en-US',
