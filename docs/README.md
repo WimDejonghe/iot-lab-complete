@@ -1,9 +1,9 @@
 ---
 home: true
 navbar: false
-heroImage: /images/hero.jpg
-heroText: Linux Essentials
-tagline: Linux Essentials Course for VIVES University of Applied Sciences (Bachelor Degree)
+heroImage: https://www.vives.be/sites/default/files/uploads/huisstijl/Logo VIVES Hogeschool - Smile.png
+heroText: ESP32 Complete technics
+tagline: ESP32 Essentials Course for VIVES University of Applied Sciences (Graduate Degree)
 actions:
   - text: Get Started →
     link: /about-this-course/
@@ -12,12 +12,12 @@ actions:
   #   link: /guide/
   #   type: secondary
 features:
- - title: Basic Programming Concepts
-   details: Learn the basic programming concepts found in almost any programming language.
- - title: Object Oriented Programming
-   details: Build custom classes, create objects and learn how an object oriented application is build.
- - title: Graphical User Interface
-   details: .NET allows modern graphical applications to be build using the Windows Presentation Foundation framework.
+ - title: ESP32 Hardware Concepts
+   details: Learn the basic hardware concepts found in a lot of ESP32 applications.
+ - title: ESP32 Programming Concepts
+   details: Learn the basic software concepts found in a lot of ESP32 applications.
+ - title: Digital Communication Technics
+   details: .IoT devices must communicate there data, more detail here.
 footer: Made by Wim with ❤️
 ---
 

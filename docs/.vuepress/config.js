@@ -5,15 +5,19 @@ import { path } from '@vuepress/utils'
 
 module.exports = {
   lang: 'en-US',
-  title: 'Starter template',
-  description: 'Starter template',
+  title: 'VIVES IoT Lab Complete',
+  description: 'Cursus voor Graduaat studenten Internet Of Things VIVES Kortrijk',
+  head: [
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?familiy=Material+Icons' }],
+    ['script', { src: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML', async: true }]
+  ],
 
   theme: defaultTheme({
-    //logo: '/images/linux.png',
+    logo: 'https://www.vives.be/sites/default/files/uploads/huisstijl/Logo VIVES Hogeschool - Smile.png',
     navbar: [
       { text: 'Toledo', link: 'https://toledo.kuleuven.be/portal' },
-      { text: 'Report Issue', link: 'https://github.com/BioBoost/course_linux_essentials/issues' },
-      { text: 'Organization', link: 'https://github.com/vives-linux-essentials-2022-2023' }
+      { text: 'Report Issue', link: 'https://github.com/WimDejonghe/iot-lab-complete/issues' },
+      { text: 'Organization', link: 'https://github.com/WimDejonghe/iot-lab-complete' }
     ],
     sidebar: [
       {
@@ -31,9 +35,9 @@ module.exports = {
      
     ],
     sidebarDepth: 1,
-    repo: 'WimDejonghe/vuePress2-starter',
+    repo: 'WimDejonghe/iot-lab-complete',
     docsDir: 'docs',
-    docsBranch: 'master'
+    docsBranch: 'main'
   }),
   serviceWorker: true,
   plugins: [
