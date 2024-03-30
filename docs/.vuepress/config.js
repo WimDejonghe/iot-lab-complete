@@ -25,11 +25,14 @@ module.exports = {
         link: '/about-this-course/README.md',
       },
       {
-        text: 'Introduction to Programming',
+        text: 'Sturen/schakelen van grotere vermogens',
         children: [
-          '/a-introductory/01-introduction/README.md',
-          '/a-introductory/02-introduction/README.md',
-          
+          '/a-groteP/00-intro/README.md',
+          '/a-groteP/01-transistor/README.md',
+          '/a-groteP/02-driver/README.md',
+          '/a-groteP/03-fet/README.md',
+          '/a-groteP/04-hbrug/README.md',
+          '/a-groteP/05-servo/README.md',
         ]
       },
      
