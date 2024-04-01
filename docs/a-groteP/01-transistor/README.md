@@ -125,3 +125,25 @@ Voor de parameters van de transistor kiezen we: Icsper = 0,1µA, hFEmin = 50, UB
 We berekenen: Rc, Ib, Rb, Pdsat, Pdsper, Rcesat en Rcesper.
 
 ![example image](./images/form6.png "An exemplary image")  
+
+## Praktisch: ESP32
+
+Stel dat een verbruiker (werkspanning = 5V) moet worden aangestuurd vanuit een digitale outputpin van de ESP32. 
+Er kunnen zich twee toestanden voordoen: 
+>- Outputpin is laag (0V) => transistor in cut-off toestand (vgl. met open schakelaar)
+>- Outputpin is hoog (3,3V) => transistor in saturatie toestand (vgl. met gesloten schakelaar)
+
+Dit is weergegeven in volgende figuren:
+
+![Een transistor in Cut-off.](./images/esp2.png "Een transistor in Cut-off.") 
+![Een transistor in saturatie.](./images/esp1.png "Een transistor in saturatie.") 
+
+Een transistor wordt in saturatie en cut-off veel toegepast. Men noemt dit de transistor als schakelaar en functioneert als een elektronische schakelaar. De bediening gebeurt echter niet manueel, maar door al dan niet een basis-stroom te sturen.
+* Geen basis-stroom = open schakelaar (er kan geen IC vloeien) -> Cut-off;
+* Te veel basis-stroom = gesloten schakelaar (IC die vloeit is maximum) -> Saturatie.
+
+De collector-emittor overgang simuleert het schakelcontact van een gewone mechanische
+schakelaar.
+
+![Links een transistor in saturatie en rechts in cut-off.](./images/tr_toestand.png "Links een transistor in saturatie en rechts in cut-off.") 
+
