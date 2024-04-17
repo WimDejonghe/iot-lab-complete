@@ -130,6 +130,62 @@ We berekenen: Rc, Ib, Rb, Pdsat, Pdsper, Rcesat en Rcesper.
 
 ![example image](./images/form6.png "An exemplary image")  
 
+Via een NPN-transistor wordt er een relais gestuurd die op zijn beurt een lamp op 230V laat branden.
+Het schema is weergegeven in de volgende figuur.
+
+![schema om een 230V lamp te schakelen met een microcontroller.](./images/relais.png "schema om een 230V lamp te schakelen met een microcontroller.") 
+
+De reden waarom er een relais gebruikt wordt is omdat microcontroller uitgangen alleen werken op een gelijkspanning. De ESP32 feather van Adafruit die wij gebruiken is bij hoog 3,3V.
+
+Een relais met een stuurkring van gelijkspanning is heel gemakkelijk te vinden.
+
+De meeste 'relais' hebben een vermogenkring die een 230V wisselspanning mogen schakelen. Tussen de microcontroller en het relais moet er een transistor worden voorzien omdat er geen relais bestaat met een stuurspanning van 3,3V en mochten die dan toch bestaan dan zou de stroom die zo een relais nodig zou hebben de 20mA van een uitgang van de microcontroller zeker overschrijden.
+
+Het berekenen en bepalen van de schakeling start bij de lamp die geschakeld wordt. We gebruiken een standaard ledlamp op 230V met een vermogen van ongeveer een 10W. Uit deze gegevens kan gemakkelijk de stroom worden berekend dat de lamp uit het net zal trekken.
+
+$$\I = \frac{P} {U} = \frac{10W} {230V} = 43,478mA$$
+
+Het relais dat we gebruiken is een relais van het merk Finder met referentie 55.34.9.024.0040 dat in volgende figuur is weergegeven. 
+
+![Het relais van Finder.](./images/rl.png "Het relais van Finder.") 
+
+In de volgende figuur is de datasheet weergegeven.
+
+![De datasheet van het Finder relais.](./images/datasheet_rl.png "De datasheet van het Finder relais.") 
+
+Het relais moet in de vermogenkring een spanning kunnen schakelen van minimum 230V AC. Het gekozen relais kan spanningen tot 250V schakelen (2). De stroom die het relais moet voeren is 43,478mA. De stroom die het relais constant kan voeren is 7A (3). In het principeschema is er een smeltzekering geplaatst van 6A. In de praktijk zal er meestal een beveiligingsautomaat geplaatst worden. De waarde van 6A is in beide gevallen hetzelfde en met die reden omdat de stroom in de kring nooit groter mag worden dan 7A omdat het relais geen grotere stromen mag voeren.
+
+De stuurspanning van het relais is 24VDC (4). Deze keuze is gemaakt omdat we een voeding van 24V DC hebben. Er zou gemakkelijk een ander relais gekozen kunnen worden met een lagere of hogere spanning.
+Om de juiste transistor te kiezen moeten we weten hoeveel stroom het relais zal trekken in de stuurkring. In de datasheet zien we dat het relais op DC een vermogen trekt van 1W (5). Uit het vermogen kan de stroom worden berekend.
+
+$$\I = \frac{P} {U} = \frac{1W} {24V} = 𝟒𝟏,𝟔𝟔𝟕𝒎𝑨$$
+
+Nu de werkspanning en de stroom van het relais is bepaald kan nu een keuze gemaakt worden voor de transistor. We hebben gekozen voor een BC574B omdat dit een veel gebruikte transistor is die niet duur is en voldoet aan de voorwaarden van onze schakeling. De belangrijkste gegevens van de datasheet zijn afgebeeld in Figuur 13.
+Belangrijk is dat de collector-emitterspanning (=UCE) groter moet zijn dan de 24V DC-spanning. Deze spanning mag maximum 45V DC bedragen (1). De collectorstroom IC moet groter zijn dan de 41,667mA die het relais verbruikt. Deze mag maximum 100mA bedragen (2).
+
+![Datasheet van de BC574B.](./images/datasheet.png "Datasheet van de BC574B.") 
+
+Het volgende dat berekend moet worden is de basisweerstand RB. De waarde moet zo gekozen worden dat de transistor in saturatie (=volledig geleiden) gaat als de uitgang van de microcontroller hoog is (=3,3V met de ESP32).
+
+In de datasheet zien we dat de versterkingsfactor hFE ligt tussen de 110 en 800 (4). We zien in de datasheet dat de versterkingsfactor vergroot als de collectorstroom vergroot.
+
+Voor onze berekening gebruiken we hier de typische versterkingsfactor van 150 (3). Dit is de waarde als IC 10μA is. Waarschijnlijk zal de versterkingsfactor in onze schakeling groter zijn omdat de collectorstroom IC groter is. Door 150 te gebruiken zal de transistor dan zeker in saturatie gaan.
+
+Bij saturatie zien we dat de basis-emitterspanning (5) gelijk is aan 0,7V. Als we alle gegevens op het schema zetten dan bekomt men de afbeelding van Figuur 14.
+
+![Schema met de transistor in saturatie 1.](./images/sch.png "Schema met de transistor in saturatie 1.") 
+
+We nemen aan dat de collector-emitterspanning is saturatie gelijk is aan 0V. Praktisch zal dit ongeveer 0,2V zijn (zie datasheet 6). Dit wil zeggen dat de volledige voedingsspanning U2 (=24V) over de spoel van het relais staat waardoor deze zal aantrekken en de lamp in de vermogenkring zal doen branden. We weten dat de collectorstroom 41,667mA zal worden. Het eerste dat we berekenen is de basisstroom.
+
+$$\I_B = \frac{I_C} {h_{FE}} = \frac{𝟒𝟏,𝟔𝟔𝟕𝒎𝑨} {150} = 𝟐𝟕𝟕,𝟕𝟖μ𝑨$$
+
+Het volgende dat we berekenen is de spanning over de basisweerstand. Dit kan berekend worden met de spanningswet van Kirchhoff (serieschakeling).
+
+$$\U_{ON} = U_{RB} + U_{BE}$$
+
+$$\U_{RB} = U_{ON} - U_{BE} = 3,3V - 0,7V = 2,6V$$
+
+
 ## Praktisch: ESP32
 
 Stel dat een verbruiker (werkspanning = 5V) moet worden aangestuurd vanuit een digitale outputpin van de ESP32. 
