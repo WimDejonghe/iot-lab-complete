@@ -235,3 +235,15 @@ schakelaar.
 
 ![Links een transistor in saturatie en rechts in cut-off.](./images/tr_toestand.png "Links een transistor in saturatie en rechts in cut-off.") 
 
+## Opdracht
+
+<div style="background-color:darkgreen; text-align:left; vertical-align:left; padding:15px;">
+<p style="color:lightgreen; margin:10px">
+Opdracht: Transistor als schakelaar.
+<ul style="color: white;">
+<li>Bouw de schakeling.</li>
+<li>Schrijf een programma voor de microcontroller dat de lamp in een lus 3 seconden laat branden en nadien 3 seconden dooft. Herhaal het programma in een oneindige lus.</li>
+<li>Toon de werking aan de docent.</li>
+</ul>
+</p>
+</div>
